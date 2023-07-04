@@ -1,10 +1,13 @@
 import React from 'react';
 
-const Provider = () => {
+import {SessionProvider} from "next-auth/react"
+import {SessionProviderProps} from "@node_modules/next-auth/src/react/types";
+
+const Provider = ({ children, session}: SessionProviderProps) => {
     return (
-        <div>
-            
-        </div>
+        <SessionProvider session={session}>
+            {children}
+        </SessionProvider>
     );
 };
 
