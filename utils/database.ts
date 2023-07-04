@@ -2,7 +2,13 @@ import mongoose from "mongoose";
 
 let isConnected = false;
 
+const mongodbUri = process.env.MONGODB_URI;
+
 export const connectToDB = async () => {
+  if (!mongodbUri) {
+    throw new Error("Google credentials are not provided.");
+  }
+
   mongoose.set("strictQuery", true);
 
   if (isConnected) {
@@ -11,10 +17,10 @@ export const connectToDB = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(mongodbUri, {
       dbName: "share_prompt",
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
     });
 
     isConnected = true;
