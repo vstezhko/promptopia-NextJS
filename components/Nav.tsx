@@ -14,7 +14,7 @@ import {
 
 type Provider = Record<string, ClientSafeProvider>;
 const Nav = () => {
-  const isUserLoggedIn = true;
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState<Provider | null>(null);
   const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
@@ -45,7 +45,7 @@ const Nav = () => {
 
       {/*Desktop Navigation*/}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -61,7 +61,7 @@ const Nav = () => {
 
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user.image || "/assets/images/logo.svg"}
                 alt="Profile"
                 width={37}
                 height={37}
@@ -88,10 +88,10 @@ const Nav = () => {
 
       {/*Mobile Navigation*/}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/images/logo.svg"
+              src={session?.user.image || "/assets/images/logo.svg"}
               alt="profile"
               width={37}
               height={37}
@@ -121,7 +121,9 @@ const Nav = () => {
                     setToggleDropdown(false);
                     signOut();
                   }}
-                >Sign Out</button>
+                >
+                  Sign Out
+                </button>
               </div>
             )}
           </div>
