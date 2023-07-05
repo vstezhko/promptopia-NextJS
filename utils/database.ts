@@ -9,14 +9,13 @@ export const connectToDB = async () => {
     throw new Error("mongodbUri are not provided.");
   }
 
-  // mongoose.set("strictQuery", true);
+  mongoose.set("strictQuery", true);
 
   if (isConnected) {
     console.log("mongoDB is already connected");
     return;
   }
 
-  console.log(mongodbUri)
   try {
     await mongoose.connect(mongodbUri, {
       dbName: "share_prompt",

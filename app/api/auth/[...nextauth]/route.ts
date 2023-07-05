@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
+import {DefaultSession, ISODateString} from "@node_modules/next-auth/src/core/types";
 
 //todo enums
 const googleClientId = process.env.GOOGLE_ID;
@@ -17,7 +18,6 @@ const googleProvider = GoogleProvider({
 });
 
 
-
 const handler = NextAuth({
   providers: [googleProvider],
   secret: process.env.NEXT_SECRET,
@@ -30,7 +30,7 @@ const handler = NextAuth({
         email: session.user.email,
       });
 
-      // session.user.id = sessionUser._id.toString();
+      session.user.id = sessionUser._id.toString();
       return session;
     },
     async signIn({ profile }) {
