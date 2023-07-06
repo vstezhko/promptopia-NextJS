@@ -1,25 +1,23 @@
 "use client";
 
-import React, {FormEvent} from "react";
+import React, { FormEvent } from "react";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import Form from "@components/Form";
-
-//todo type
-export type Post = {
-  prompt: string | ReadonlyArray<string> | number | undefined;
-  tag: string | ReadonlyArray<string> | number | undefined;
-};
+// @ts-ignore
+import { Post } from "@types/types";
 
 const CreatePrompt = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [post, setPost] = useState<Post>({
-    prompt: "",
-    tag: "",
+    prompt: '',
+    tag: '',
+    creator: null,
+    _id: null
   });
 
   const createPrompt = async (e: FormEvent) => {

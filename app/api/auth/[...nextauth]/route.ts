@@ -1,8 +1,8 @@
-import NextAuth from "next-auth";
+import NextAuth, {CallbacksOptions} from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
-import {DefaultSession, ISODateString} from "@node_modules/next-auth/src/core/types";
+
 
 //todo enums
 const googleClientId = process.env.GOOGLE_ID;
@@ -31,9 +31,11 @@ const handler = NextAuth({
       });
 
       session.user.id = sessionUser._id.toString();
+      console.log('session', session)
       return session;
     },
     async signIn({ profile }) {
+      console.log('profile sign in', profile)
 
       if (!profile?.email || !profile?.name || profile?.image) {
         throw new Error("profile data are not provided.");
@@ -51,7 +53,7 @@ const handler = NextAuth({
           await User.create({
             email: profile.email,
             username: profile.name.replace(" ", "").toLowerCase(),
-            image: profile.image,
+            image: profile.picture,
           });
         }
 
