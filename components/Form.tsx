@@ -1,6 +1,6 @@
 import React, {FormEvent} from "react";
 import Link from "next/link";
-import { Post } from "@app/create-prompt/page";
+import {Post} from "@type/types";
 
 //todo type
 type FormProps = {
