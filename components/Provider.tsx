@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {SessionProvider} from "next-auth/react"
-import {SessionProviderProps} from "@node_modules/next-auth/src/react/types";
-import {DefaultSession, ISODateString} from "@node_modules/next-auth/src/core/types";
+import {SessionProviderProps} from "@node_modules/next-auth/react/types";
+import {DefaultSession, ISODateString} from "@node_modules/next-auth/core/types";
 
 export interface Session {
     user: {

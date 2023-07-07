@@ -1,5 +1,4 @@
-import NextAuth from 'next-auth';
-import {DefaultSession} from "@node_modules/next-auth/src/core/types";
+import {DefaultSession} from "@node_modules/next-auth/core/types";
 
 
 declare module 'next-auth' {
