@@ -31,15 +31,15 @@ const EditPrompt = () => {
       });
     };
 
-    if(promptId) getPromptDetails()
+    if (promptId) getPromptDetails();
   }, [promptId]);
 
   const updatePrompt = async (e: FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
-    if(!promptId) {
-      throw new Error('Prompt ID not found')
+    if (!promptId) {
+      throw new Error("Prompt ID not found");
     }
 
     try {
