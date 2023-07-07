@@ -1,4 +1,4 @@
-import NextAuth, {CallbacksOptions} from "next-auth";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
@@ -7,6 +7,7 @@ import { connectToDB } from "@utils/database";
 //todo enums
 const googleClientId = process.env.GOOGLE_ID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+const nextSecret = process.env.NEXT_SECRET;
 
 if (!googleClientId || !googleClientSecret) {
     throw new Error("Google credentials are not provided.");
@@ -20,7 +21,7 @@ const googleProvider = GoogleProvider({
 
 const handler = NextAuth({
   providers: [googleProvider],
-  secret: process.env.NEXT_SECRET,
+  secret: nextSecret,
   callbacks: {
     async session({ session }) {
       if (!session?.user?.email) {
