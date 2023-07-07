@@ -13,3 +13,10 @@ export type Post = {
     creator: Creator | null,
     _id: number | null
 };
+
+export interface ParamsQuery {
+    params: {
+        id: string;
+        name: string;
+    }
+}

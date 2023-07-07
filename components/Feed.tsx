@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import PromptCardList from "@components/PromptCardList"
 import PromptCard from "./PromptCard";
 // @ts-ignore
-import { Post } from "@types/types";
+import { Post } from "@type/types";
 
 const Feed = () => {
   const [searchText, setSearchText] = useState("");

@@ -1,5 +1,5 @@
 // @ts-ignore
-import { Post } from "@types/types";
+import { Post } from "@type/types";
 import PromptCard from "@components/PromptCard";
 import React, { Key } from "react";
 
