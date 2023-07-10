@@ -24,6 +24,8 @@ const handler = NextAuth({
   secret: nextSecret,
   callbacks: {
     async session({ session }) {
+      console.log('SESSION !!!', session)
+
       if (!session?.user?.email) {
         throw new Error("session user email are not provided.");
       }
