@@ -31,7 +31,7 @@ const handler = NextAuth({
         email: session.user.email,
       });
 
-      console.log(session.user)
+      console.log('SESSION USER', session.user)
 
       session.user.id = sessionUser._id.toString();
       console.log('session', session)
@@ -59,7 +59,7 @@ const handler = NextAuth({
             image: profile.picture,
           });
 
-          console.log(await res)
+          console.log('PROMISE', await res)
         }
 
         return true;
