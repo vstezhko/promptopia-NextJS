@@ -31,7 +31,7 @@ const handler = NextAuth({
         email: session.user.email,
       });
 
-      console.log('SESSION USER', session.user)
+      console.log('SESSION USER', sessionUser)
 
       session.user.id = sessionUser._id.toString();
       console.log('session', session)
@@ -53,13 +53,11 @@ const handler = NextAuth({
 
         //if not, create a user
         if (!userExists) {
-          const res = await User.create({
+          await User.create({
             email: profile.email,
             username: profile.name.replace(" ", "").toLowerCase(),
             image: profile.picture,
           });
-
-          console.log('PROMISE', await res)
         }
 
         return true;
