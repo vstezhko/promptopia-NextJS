@@ -26,14 +26,16 @@ const handler = NextAuth({
     async session({ session }) {
       console.log('SESSION !!!', session)
 
-      if (!session?.user?.email) {
+      if (!session.user?.email) {
         throw new Error("session user email are not provided.");
       }
       const sessionUser = await User.findOne({
         email: session.user.email,
       });
 
-      console.log('SESSION USER', sessionUser)
+      console.log('SESSION ильязубович', User.exists({
+        username: "ильязубович",
+      }))
 
       session.user.id = sessionUser._id.toString();
       console.log('session', session)
