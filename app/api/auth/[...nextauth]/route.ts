@@ -24,7 +24,6 @@ const handler = NextAuth({
   secret: nextSecret,
   callbacks: {
     async session({ session }) {
-      console.log('SESSION !!!', session)
 
       if (!session.user?.email) {
         throw new Error("session user email are not provided.");
@@ -33,16 +32,10 @@ const handler = NextAuth({
         email: session.user.email,
       });
 
-      console.log('SESSION ильязубович', await User.exists({
-        email: session.user.email,
-      }))
-
       session.user.id = sessionUser._id.toString();
-      console.log('session', session)
       return session;
     },
     async signIn({ profile }) {
-      console.log('profile sign in', profile)
 
       if (!profile?.email || !profile?.name || profile?.image) {
         throw new Error("profile data are not provided.");
