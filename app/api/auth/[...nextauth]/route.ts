@@ -34,7 +34,7 @@ const handler = NextAuth({
       });
 
       console.log('SESSION ильязубович', await User.exists({
-        username: "ильязубович",
+        email: session.user.email,
       }))
 
       session.user.id = sessionUser._id.toString();
