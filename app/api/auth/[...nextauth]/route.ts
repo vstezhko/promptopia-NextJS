@@ -3,14 +3,13 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
-
 //todo enums
 const googleClientId = process.env.GOOGLE_ID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 const nextSecret = process.env.NEXT_SECRET;
 
 if (!googleClientId || !googleClientSecret) {
-    throw new Error("Google credentials are not provided.");
+  throw new Error("Google credentials are not provided.");
 }
 
 const googleProvider = GoogleProvider({
@@ -18,13 +17,11 @@ const googleProvider = GoogleProvider({
   clientSecret: googleClientSecret,
 });
 
-
 const handler = NextAuth({
   providers: [googleProvider],
   secret: nextSecret,
   callbacks: {
     async session({ session }) {
-
       if (!session.user?.email) {
         throw new Error("session user email are not provided.");
       }
@@ -36,7 +33,6 @@ const handler = NextAuth({
       return session;
     },
     async signIn({ profile }) {
-
       if (!profile?.email || !profile?.name || profile?.image) {
         throw new Error("profile data are not provided.");
       }
@@ -52,20 +48,18 @@ const handler = NextAuth({
         if (!userExists) {
           await User.create({
             email: profile.email.toLowerCase(),
-            username: profile.name.toLowerCase(),
+            username: profile.name.replace(" ", "").toLowerCase(),
             image: profile.picture,
           });
         }
 
         return true;
-
       } catch (error) {
         console.log(error);
       }
       return false;
     },
-  }
-
+  },
 });
 
 export { handler as GET, handler as POST };
