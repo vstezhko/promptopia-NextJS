@@ -33,7 +33,7 @@ const handler = NextAuth({
         email: session.user.email,
       });
 
-      console.log('SESSION ильязубович', User.exists({
+      console.log('SESSION ильязубович', await User.exists({
         username: "ильязубович",
       }))
 
